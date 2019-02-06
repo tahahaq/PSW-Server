@@ -60,8 +60,8 @@ router.post("/subscribe", function (req, res) {
 
 
 /**
- * @api {post} /event/invitation Insert invitations
- * @apiGroup Event Invitation
+ * @api {post} /email/send-message Send message
+ * @apiGroup Email
  * @apiParamExample {json} Input
  *{
   *  "email" : "ali@gmail.com",
