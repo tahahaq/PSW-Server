@@ -7,7 +7,9 @@ let express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose");
 
-let emailRoutes = require("./routes/email");
+let emailRoutes = require("./routes/email"),
+    productRoutes = require('./routes/product'),
+    adminRoutes = require('./routes/admin');
 
 // App Config
 
@@ -19,6 +21,8 @@ app.use(methodOverride("_method"));
 
 
 app.use('/email', emailRoutes);
+app.use(productRoutes);
+app.use('/admin' , adminRoutes);
 
 
 const port = process.env.PORT || 7001;

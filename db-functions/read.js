@@ -1,6 +1,27 @@
 var exports = module.exports = {},
     utilsFunctions = require('../utils/functions'),
+    productModel = require('../models/product'),
     constants = require('../utils/constant');
+
+
+exports.getAllProducts = async () => {
+  try {
+      return productModel.find({});
+  }  catch (e) {
+      console.log(e);
+      throw new Error(e);
+  }
+};
+
+exports.getProductByCategory = async (category) => {
+    try {
+        console.log()
+       return await productModel.find({category});
+    }  catch (e) {
+        console.log(e);
+        throw new Error(e);
+    }
+};
 
 //
 // exports.getEventById = async (eventId) => {

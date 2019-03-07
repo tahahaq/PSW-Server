@@ -6,7 +6,9 @@ exports.admin_email = "haqtaha@gmail.com";
 
 
 exports.responseMessages = {
-
+    productUpdated : "Successfully updated product",
+    productRemoved : "Successfully removed product",
+    productAdded : "Successfully added product",
     passwordNotMatch: 'Password doesn\'t match - Please Retry',
     dataFetched: 'Success - Data fetched successfully',
     emailNotFound: 'Email not found - Please enter correct one',

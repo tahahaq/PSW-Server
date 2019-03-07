@@ -1,4 +1,5 @@
 var exports = module.exports = {},
+    productModel = require('../models/product'),
     constants = require('../utils/constant');
 
 
@@ -157,15 +158,18 @@ var exports = module.exports = {},
 //     }
 // };
 //
-// exports.deleteFeaturedPlaceUserReview= async (reviewId) => {
-//     try {
-//         await  userReviewModel.findByIdAndRemove(reviewId);
-//         return constants.responseMessages.Success
-//     }  catch (e) {
-//         console.log(e);
-//         throw new Error(e)
-//     }
-// };
+
+exports.deleteProduct= async (id) => {
+    try {
+        await  productModel.findByIdAndRemove(id);
+        return constants.responseMessages.productRemoved;
+
+    }  catch (e) {
+        console.log(e);
+        throw new Error(e)
+    }
+};
+
 //
 //
 // exports.deleteFeaturedPlace = async (placeId) => {
