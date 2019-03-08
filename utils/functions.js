@@ -1,8 +1,21 @@
 var exports = module.exports = {},
     constant = require('../utils/constant'),
+    adminModel = require('../models/admin'),
     nodeMailer = require('nodemailer');
 
 
+exports.isDuplicateUser = async (user) => {
+    let duplicateUser = await adminModel.find({email: user.email});
+    return !Array.isArray(duplicateUser) || !duplicateUser.length;
+};
+
+exports.isEmpty = (obj) => {
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+};
 
 // giving access to nodeMailer for logging into mail account
 let mailTransporter = nodeMailer.createTransport({

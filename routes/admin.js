@@ -3,10 +3,143 @@ let express = require('express'),
     constants = require('../utils/constant'),
     db_insert = require('../db-functions/insert'),
     db_delete = require('../db-functions/delete'),
+    jwt = require('jsonwebtoken'),
     db_read = require('../db-functions/read'),
     db_update = require('../db-functions/update'),
     utilsFunction = require('../utils/functions'),
     emailModel = require('../models/email');
+
+
+
+
+
+function verifyToken(req, res, next) {
+
+    let token = req.body['x-access-token'];
+    if (!token)
+        return res.status(403).send({
+            auth: false, message: 'No token provided.'});
+    jwt.verify(token, constants.secret.secret, function (err, decoded) {
+        if (err)
+            return res.status(500).send({auth: false, message: 'Failed to authenticate token.'});
+        // if everything good, save to request for use in other routes
+        req.userId = decoded.id;
+        next();
+    });
+}
+
+
+
+/**
+ * @api {post} /admin/login  Signs In The EndUser
+ * @apiGroup Auth
+ *@apiName Login
+ *  @apiParamExample {json} Input
+ *    {
+ *      "email": "email@example.com",
+ *      "password" : "12345678"
+ *    }
+ *
+ *
+ * @apiSuccessExample {json} Success
+ *         {
+ *            "responseCode": 200,
+ *              "responseMessage": "Success",
+ *              "data": {
+ *                  "result": {
+ *                      "auth": true,
+ *                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMjFkZTIyZWQ5MzA2MDAxNjRhYzkzYSIsImlhdCI6MTU0NTcyMzQ1MywiZXhwIjoxNTQ1ODA4MDUzfQ.82kXmuOOZAx2Yjt-oJev7dELQ3IyLTntqezVcDVf6eo",
+ *                      "user": {
+ *                          "_id": "5c21de22ed930600164ac93a",
+ *                          "email": "123@123.com",
+ *                          "__v": 0
+ *                      }
+ *                  }
+ *              }
+ *          }
+ * @apiErrorExample {json} List error
+ *    HTTP/1.1 503 Internal Server Error
+ */
+
+
+router.post('/login', function (req, res) {
+    db_read.authenticateAdmin(req.body).then((response) => {
+
+        //SUCCESS
+        res.status(200).send(
+            {
+                responseCode: 200,
+                responseMessage: constants.responseMessages.Success,
+                data: {
+                    result: response
+                }
+            }
+        )
+    }).catch((error) => {
+        //ERROR
+        res.status(500).send(
+            {
+                responseCode: 500,
+                responseMessage: error.message
+            }
+        )
+    });
+});
+
+/**
+ * @api {post} /admin/register  Registers a new admin
+ * @apiGroup Auth
+ *@apiName Register
+ *  @apiParamExample {json} Input
+ *    {
+ *      "email": "email@example.com",
+ *      "password" : "12345678"
+ *    }
+ *
+ *
+ * @apiSuccessExample {json} Success
+ *         {
+ *            "responseCode": 201,
+ *              "responseMessage": "Success",
+ *              "data": {
+ *                  "result": {
+ *                      "auth": true,
+ *                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMjFkZTIyZWQ5MzA2MDAxNjRhYzkzYSIsImlhdCI6MTU0NTcyMzQ1MywiZXhwIjoxNTQ1ODA4MDUzfQ.82kXmuOOZAx2Yjt-oJev7dELQ3IyLTntqezVcDVf6eo",
+ *                      "user": {
+ *                          "_id": "5c21de22ed930600164ac93a",
+ *                          "email": "123@123.com",
+ *                          "__v": 0
+ *                      }
+ *                  }
+ *              }
+ *          }
+ * @apiErrorExample {json} List error
+ *    HTTP/1.1 503 Internal Server Error
+ */
+
+
+router.post('/register', verifyToken,function (req, res) {
+    db_insert.insertAdmin(req.body).then((response) => {
+        //SUCCESS
+        res.status(200).send(
+            {
+                responseCode: 200,
+                responseMessage: constants.responseMessages.Success,
+                data: {
+                    result: response
+                }
+            }
+        )
+    }).catch((error) => {
+        //ERROR
+        res.status(500).send(
+            {
+                responseCode: 500,
+                responseMessage: error.message
+            }
+        )
+    });
+});
 
 
 ////////////////////////////////////////////////////  EMAIL  /////////////////////////////////////////////////////////////
@@ -43,7 +176,7 @@ let express = require('express'),
  *    HTTP/1.1 503 Internal Server Error
  */
 
-router.post("/product", function (req, res) {
+router.post("/product", verifyToken,  function (req, res) {
     db_insert.insertProduct(req.body).then((response) => {
         //SUCCESS
         res.status(201).send(
@@ -84,7 +217,7 @@ router.post("/product", function (req, res) {
  *    HTTP/1.1 503 Internal Server Error
  */
 
-router.delete("/product/:id", function (req, res) {
+router.delete("/product/:id",verifyToken, function (req, res) {
     db_delete.deleteProduct(req.params.id).then((response) => {
         //SUCCESS
         res.status(201).send(
@@ -137,7 +270,7 @@ router.delete("/product/:id", function (req, res) {
  * @apiErrorExample {json} List error
  *    HTTP/1.1 503 Internal Server Error
  */
-router.put("/product/:id", function (req, res) {
+router.put("/product/:id", verifyToken,function (req, res) {
     db_update.updateProduct(req.params.id, req.body).then((response) => {
         //SUCCESS
         res.status(201).send(
