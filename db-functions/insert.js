@@ -6,8 +6,19 @@ var exports = module.exports = {},
     bcrypt = require('bcrypt'),
     adminModel = require('../models/admin'),
     productModel = require('../models/product'),
+    videoModel = require('../models/video'),
+    contactModel = require('../models/contact'),
     db_read = require('./read');
 
+exports.insertVideoLink = async (video) => {
+    try {
+        await videoModel.create(video);
+        return constants.responseMessages.Success;
+    }  catch (e) {
+        console.log(e);
+        throw new Error(e)
+    }
+};
 
 exports.insertProduct = async (product) => {
     try {
@@ -19,6 +30,15 @@ exports.insertProduct = async (product) => {
     }
 };
 
+exports.insertContactDetails = async (contact) => {
+    try {
+        await contactModel.create(contact);
+        return constants.responseMessages.contactDetailsAdded;
+    }  catch (e) {
+        console.log(e);
+        throw new Error(e)
+    }
+};
 
 
 exports.insertEmailForSubscription = async (email) => {

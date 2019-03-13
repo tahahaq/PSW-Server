@@ -1,5 +1,53 @@
 define({ "api": [
   {
+    "type": "put",
+    "url": "/admin/product",
+    "title": "Updates Contact Details",
+    "group": "Admin",
+    "name": "ContactDetailsUpdate",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "id",
+            "optional": false,
+            "field": "Contact",
+            "description": "<p>Details Id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Input",
+          "content": "{\n\t            \"email\" : \"qwqwwqsddssds1d\",\n\t            \"phone\" : [\"223323\",23233223,\"saaasas\"],\n\t            \"address\" : \"ewewjeweweiwiewiwe\"\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"responseCode\": 201,\n \"responseMessage\": \"Success\",\n \"data\": {\n    \"result\":  \"Successfully updated contact details\"\n}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "List error",
+          "content": "HTTP/1.1 503 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/admin.js",
+    "groupTitle": "Admin"
+  },
+  {
     "type": "delete",
     "url": "/admin/product/:id",
     "title": "Deletes a product",
@@ -126,6 +174,54 @@ define({ "api": [
     "groupTitle": "Admin"
   },
   {
+    "type": "put",
+    "url": "/admin/video",
+    "title": "Updates Video Link",
+    "group": "Admin",
+    "name": "VideoLinkUpdate",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "id",
+            "optional": false,
+            "field": "Video",
+            "description": "<p>Link Id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Input",
+          "content": "{\n\t           \"link\" : \"www.youtube.com/weh239h23932233\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"responseCode\": 201,\n \"responseMessage\": \"Success\",\n \"data\": {\n    \"result\":  \"Successfully updated video link\"\n}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "List error",
+          "content": "HTTP/1.1 503 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/admin.js",
+    "groupTitle": "Admin"
+  },
+  {
     "type": "post",
     "url": "/admin/login",
     "title": "Signs In The EndUser",
@@ -232,7 +328,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/email.js",
+    "filename": "./routes/admin.js",
     "groupTitle": "Email",
     "name": "PostEmailSendMessage"
   },
@@ -269,9 +365,46 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/admin.js",
+    "filename": "./routes/email.js",
     "groupTitle": "Email",
     "name": "PostEmailSendMessage"
+  },
+  {
+    "type": "post",
+    "url": "/email/subscribe",
+    "title": "Subscribe to email updates",
+    "group": "Email",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Input",
+          "content": "{\n\t\"email\" : \"email@example.com\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n   \"responseCode\": 201,\n     \"responseMessage\": \"Success\",\n     \"data\": {\n         \"result\": Success\n     }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Update error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/contact.js",
+    "groupTitle": "Email",
+    "name": "PostEmailSubscribe"
   },
   {
     "type": "post",
@@ -378,6 +511,34 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routes/product.js",
     "groupTitle": "Product"
+  },
+  {
+    "type": "post",
+    "url": "/video",
+    "title": "Get video link",
+    "group": "Video",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   {\n      \"responseCode\": 201,\n        \"responseMessage\": \"Success\",\n        \"data\": {\n        \"result\": [\n{\n        \"_id\": \"5c88f2ff2d1c1903544b0a4d\",\n        \"link\": \"assasaas\",\n        \"__v\": 0\n    }\n]\n        }\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Update error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/video.js",
+    "groupTitle": "Video",
+    "name": "PostVideo"
   },
   {
     "success": {

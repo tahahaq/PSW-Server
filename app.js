@@ -9,6 +9,8 @@ let express = require("express"),
 
 let emailRoutes = require("./routes/email"),
     productRoutes = require('./routes/product'),
+    contactRoutes = require('./routes/contact'),
+    videoRoutes = require('./routes/video'),
     adminRoutes = require('./routes/admin');
 
 // App Config
@@ -22,6 +24,8 @@ app.use(methodOverride("_method"));
 
 app.use('/email', emailRoutes);
 app.use(productRoutes);
+app.use('/contact',contactRoutes);
+app.use('/video',videoRoutes);
 app.use('/admin' , adminRoutes);
 
 

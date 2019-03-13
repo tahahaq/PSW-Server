@@ -7,6 +7,9 @@ exports.secret ='MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAW4lFUCuJ6QDo5djTQtuhebj9aNq/m59
 exports.SALT = 10;
 
 exports.responseMessages = {
+    videoLinkUpdated : "Successfully updated video link",
+    contactDetailsUpdated : "Successfully updated contact details",
+    contactDetailsAdded : "Successfully added contact details",
     productUpdated : "Successfully updated product",
     productRemoved : "Successfully removed product",
     productAdded : "Successfully added product",

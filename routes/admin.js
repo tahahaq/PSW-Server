@@ -9,10 +9,6 @@ let express = require('express'),
     utilsFunction = require('../utils/functions'),
     emailModel = require('../models/email');
 
-
-
-
-
 function verifyToken(req, res, next) {
 
     let token = req.body['x-access-token'];
@@ -146,6 +142,155 @@ router.post('/register', verifyToken,function (req, res) {
 
 
 // POST
+
+
+
+
+// router.post("/contact", function (req, res) {
+//     db_insert.insertContactDetails(req.body).then((response) => {
+//         //SUCCESS
+//         res.status(201).send(
+//             {
+//                 responseCode: 201,
+//                 responseMessage: constants.responseMessages.Success,
+//                 data: {
+//                     result: response
+//                 }
+//             }
+//         )
+//     }).catch((error) => {
+//         //ERROR
+//         res.status(500).send(
+//             {
+//                 responseCode: 500,
+//                 responseMessage: error.message
+//             }
+//         )
+//     });
+// });
+//
+
+// POST
+
+
+/**
+ * @api {put} /admin/product Updates Contact Details
+ * @apiGroup Admin
+ * @apiName ContactDetailsUpdate
+ * @apiParam {id} Contact Details Id
+ *   @apiParamExample {json} Input
+* {
+ *	            "email" : "qwqwwqsddssds1d",
+ *	            "phone" : ["223323",23233223,"saaasas"],
+ *	            "address" : "ewewjeweweiwiewiwe"
+ *
+ *}
+ * @apiSuccessExample {json} Success
+ *{
+ *   "responseCode": 201,
+ *  "responseMessage": "Success",
+ *  "data": {
+ *     "result":  "Successfully updated contact details"
+ * }
+ *}
+ * @apiErrorExample {json} List error
+ *    HTTP/1.1 503 Internal Server Error
+ */
+
+router.put("/contact/:id",   function (req, res) {
+    db_update.updateContactDetails(req.params.id,req.body).then((response) => {
+        //SUCCESS
+        res.status(201).send(
+            {
+                responseCode: 201,
+                responseMessage: constants.responseMessages.Success,
+                data: {
+                    result: response
+                }
+            }
+        )
+    }).catch((error) => {
+        //ERROR
+        res.status(500).send(
+            {
+                responseCode: 500,
+                responseMessage: error.message
+            }
+        )
+    });
+});
+
+
+/**
+ * @api {put} /admin/video Updates Video Link
+ * @apiGroup Admin
+ * @apiName VideoLinkUpdate
+ * @apiParam {id} Video Link Id
+ *   @apiParamExample {json} Input
+ * {
+ *	           "link" : "www.youtube.com/weh239h23932233",
+ *}
+ * @apiSuccessExample {json} Success
+ *{
+ *   "responseCode": 201,
+ *  "responseMessage": "Success",
+ *  "data": {
+ *     "result":  "Successfully updated video link"
+ * }
+ *}
+ * @apiErrorExample {json} List error
+ *    HTTP/1.1 503 Internal Server Error
+ */
+
+
+router.put("/video/:id",   function (req, res) {
+    db_update.updateVideoLink(req.params.id,req.body).then((response) => {
+        //SUCCESS
+        res.status(201).send(
+            {
+                responseCode: 201,
+                responseMessage: constants.responseMessages.Success,
+                data: {
+                    result: response
+                }
+            }
+        )
+    }).catch((error) => {
+        //ERROR
+        res.status(500).send(
+            {
+                responseCode: 500,
+                responseMessage: error.message
+            }
+        )
+    });
+});
+
+// router.post("/video",   function (req, res) {
+//     db_insert.insertVideoLink(req.body).then((response) => {
+//         //SUCCESS
+//         res.status(201).send(
+//             {
+//                 responseCode: 201,
+//                 responseMessage: constants.responseMessages.Success,
+//                 data: {
+//                     result: response
+//                 }
+//             }
+//         )
+//     }).catch((error) => {
+//         //ERROR
+//         res.status(500).send(
+//             {
+//                 responseCode: 500,
+//                 responseMessage: error.message
+//             }
+//         )
+//     });
+// });
+
+
+
 
 /**
  * @api {post} /admin/product Inserts product
