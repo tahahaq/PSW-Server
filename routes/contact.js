@@ -11,18 +11,26 @@ let express = require('express'),
 // POST
 
 /**
- * @api {post} /email/subscribe Subscribe to email updates
- * @apiGroup Email
- *  * @apiParamExample {json} Input
- *{
- *	"email" : "email@example.com"
- *  }
+ * @api {get} /contact Get ContactUs Details
+ * @apiGroup Contact
  * @apiSuccessExample {json} Success
  *         {
  *            "responseCode": 201,
  *              "responseMessage": "Success",
  *              "data": {
- *                  "result": Success
+ *                  "result": [
+   *             {
+ *             phone: [
+ *              "223323",
+ *              23233223,
+ *              "saaasas"
+ *              ],
+ *              _id: "5c88d2993a2a74465c692553",
+ *              email: "qwqwwqsddssds1d",
+ *              address: "ewewjeweweiwiewiwe",
+ *              __v: 0
+ *              }
+ *              ]
  *              }
  *          }
  * @apiErrorExample {json} Update error

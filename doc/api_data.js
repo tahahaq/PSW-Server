@@ -175,7 +175,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/admin/video",
+    "url": "/admin/video/:id",
     "title": "Updates Video Link",
     "group": "Admin",
     "name": "VideoLinkUpdate",
@@ -296,6 +296,34 @@ define({ "api": [
     "groupTitle": "Auth"
   },
   {
+    "type": "get",
+    "url": "/contact",
+    "title": "Get ContactUs Details",
+    "group": "Contact",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n   \"responseCode\": 201,\n     \"responseMessage\": \"Success\",\n     \"data\": {\n         \"result\": [\n    {\n    phone: [\n     \"223323\",\n     23233223,\n     \"saaasas\"\n     ],\n     _id: \"5c88d2993a2a74465c692553\",\n     email: \"qwqwwqsddssds1d\",\n     address: \"ewewjeweweiwiewiwe\",\n     __v: 0\n     }\n     ]\n     }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Update error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/contact.js",
+    "groupTitle": "Contact",
+    "name": "GetContact"
+  },
+  {
     "type": "post",
     "url": "/email/send-message",
     "title": "Send message",
@@ -368,43 +396,6 @@ define({ "api": [
     "filename": "./routes/email.js",
     "groupTitle": "Email",
     "name": "PostEmailSendMessage"
-  },
-  {
-    "type": "post",
-    "url": "/email/subscribe",
-    "title": "Subscribe to email updates",
-    "group": "Email",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Input",
-          "content": "{\n\t\"email\" : \"email@example.com\"\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success",
-          "content": "{\n   \"responseCode\": 201,\n     \"responseMessage\": \"Success\",\n     \"data\": {\n         \"result\": Success\n     }\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Update error",
-          "content": "HTTP/1.1 500 Internal Server Error",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "./routes/contact.js",
-    "groupTitle": "Email",
-    "name": "PostEmailSubscribe"
   },
   {
     "type": "post",

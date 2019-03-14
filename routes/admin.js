@@ -222,7 +222,7 @@ router.put("/contact/:id",   function (req, res) {
 
 
 /**
- * @api {put} /admin/video Updates Video Link
+ * @api {put} /admin/video/:id Updates Video Link
  * @apiGroup Admin
  * @apiName VideoLinkUpdate
  * @apiParam {id} Video Link Id
