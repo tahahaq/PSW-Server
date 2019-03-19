@@ -7,6 +7,7 @@ productSchema = new mongoose.Schema({
     price : String,
     short_title_description : String,
     weight : [],
+    dimension : [],
     color : [],
     category : String,
     rating : Number
