@@ -1,5 +1,6 @@
 var exports = module.exports = {},
     productModel = require('../models/product'),
+    contactModel = require('../models/contact'),
     constants = require('../utils/constant');
 
 
@@ -158,6 +159,21 @@ var exports = module.exports = {},
 //     }
 // };
 //
+
+exports.deleteContact= async (id) => {
+    try {
+        let contacts = await contactModel.find({});
+        if(contacts.length === 1){
+            throw new Error("Can't delete. Please add one contact first then delete this one!")
+        }
+        await  contactModel.findByIdAndRemove(id);
+        return constants.responseMessages.productRemoved;
+
+    }  catch (e) {
+        console.log(e);
+        throw new Error(e)
+    }
+};
 
 exports.deleteProduct= async (id) => {
     try {

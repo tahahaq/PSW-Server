@@ -4,7 +4,6 @@ var exports = module.exports = {},
     videoModel = require('../models/video'),
     constants = require('../utils/constant');
 
-
 exports.updateVideoLink = async (id, link) => {
     try {
         await videoModel.findByIdAndUpdate(id,link);

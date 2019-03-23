@@ -143,35 +143,62 @@ router.post('/register', verifyToken,function (req, res) {
 
 // POST
 
+/**
+ * @api {post} /admin/contact Adds a new Contact Object
+ * @apiGroup Admin
+ *@apiName AddContact
+ *  @apiParamExample {json} Input
+ *    {
+ *      "email": "email@example.com",
+ *      "password" : "12345678"
+ *    }
+ *
+ *
+ * @apiSuccessExample {json} Success
+ *         {
+ *            "responseCode": 201,
+ *              "responseMessage": "Success",
+ *              "data": {
+ *                  "result": {
+ *                      "auth": true,
+ *                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMjFkZTIyZWQ5MzA2MDAxNjRhYzkzYSIsImlhdCI6MTU0NTcyMzQ1MywiZXhwIjoxNTQ1ODA4MDUzfQ.82kXmuOOZAx2Yjt-oJev7dELQ3IyLTntqezVcDVf6eo",
+ *                      "user": {
+ *                          "_id": "5c21de22ed930600164ac93a",
+ *                          "email": "123@123.com",
+ *                          "__v": 0
+ *                      }
+ *                  }
+ *              }
+ *          }
+ * @apiErrorExample {json} List error
+ *    HTTP/1.1 503 Internal Server Error
+ */
 
 
 
-// router.post("/contact", function (req, res) {
-//     db_insert.insertContactDetails(req.body).then((response) => {
-//         //SUCCESS
-//         res.status(201).send(
-//             {
-//                 responseCode: 201,
-//                 responseMessage: constants.responseMessages.Success,
-//                 data: {
-//                     result: response
-//                 }
-//             }
-//         )
-//     }).catch((error) => {
-//         //ERROR
-//         res.status(500).send(
-//             {
-//                 responseCode: 500,
-//                 responseMessage: error.message
-//             }
-//         )
-//     });
-// });
-//
-
-// POST
-
+router.post("/contact", verifyToken, function (req, res) {
+    console.log("/Contact")
+    db_insert.insertContactDetails(req.body).then((response) => {
+        //SUCCESS
+        res.status(201).send(
+            {
+                responseCode: 201,
+                responseMessage: constants.responseMessages.Success,
+                data: {
+                    result: response
+                }
+            }
+        )
+    }).catch((error) => {
+        //ERROR
+        res.status(500).send(
+            {
+                responseCode: 500,
+                responseMessage: error.message
+            }
+        )
+    });
+});
 
 /**
  * @api {put} /admin/product Updates Contact Details
@@ -197,8 +224,49 @@ router.post('/register', verifyToken,function (req, res) {
  *    HTTP/1.1 503 Internal Server Error
  */
 
-router.put("/contact/:id",   function (req, res) {
+router.put("/contact/:id", verifyToken,  function (req, res) {
     db_update.updateContactDetails(req.params.id,req.body).then((response) => {
+        //SUCCESS
+        res.status(201).send(
+            {
+                responseCode: 201,
+                responseMessage: constants.responseMessages.Success,
+                data: {
+                    result: response
+                }
+            }
+        )
+    }).catch((error) => {
+        //ERROR
+        res.status(500).send(
+            {
+                responseCode: 500,
+                responseMessage: error.message
+            }
+        )
+    });
+});
+
+
+/**
+ * @api {delete} /admin/contact/:id Deletes a contact
+ * @apiGroup Admin
+ * @apiName Delete Contact
+ * @apiParam {id} Contact ID
+ * @apiSuccessExample {json} Success
+ *        {
+ *          "responseCode": 201,
+ *             "responseMessage": "Success",
+ *             "data": {
+ *                  "result": "Successfully removed product"
+ *             }
+ *          }
+ * @apiErrorExample {json} List error
+ *    HTTP/1.1 503 Internal Server Error
+ */
+
+router.delete("/contact/:id",verifyToken, function (req, res) {
+    db_delete.deleteContact(req.params.id).then((response) => {
         //SUCCESS
         res.status(201).send(
             {

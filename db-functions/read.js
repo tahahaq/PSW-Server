@@ -39,7 +39,7 @@ exports.authenticateAdmin = async (user) => {
 
 exports.getVideoLink = async () => {
     try {
-        return videoModel.find({});
+        return await videoModel.find({});
     }  catch (e) {
         console.log(e);
         throw new Error(e);
@@ -48,7 +48,7 @@ exports.getVideoLink = async () => {
 
 exports.getContactDetails = async () => {
     try {
-        return contactModel.find({});
+        return await contactModel.find({});
     }  catch (e) {
         console.log(e);
         throw new Error(e);
@@ -57,7 +57,7 @@ exports.getContactDetails = async () => {
 
 exports.getAllProducts = async () => {
   try {
-      return productModel.find({});
+      return await productModel.find({});
   }  catch (e) {
       console.log(e);
       throw new Error(e);
