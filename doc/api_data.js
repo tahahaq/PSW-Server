@@ -1,5 +1,42 @@
 define({ "api": [
   {
+    "type": "post",
+    "url": "/admin/contact",
+    "title": "Adds a new Contact Object",
+    "group": "Admin",
+    "name": "AddContact",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Input",
+          "content": "{\n  \"email\": \"email@example.com\",\n  \"password\" : \"12345678\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n   \"responseCode\": 201,\n     \"responseMessage\": \"Success\",\n     \"data\": {\n         \"result\": {\n             \"auth\": true,\n             \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMjFkZTIyZWQ5MzA2MDAxNjRhYzkzYSIsImlhdCI6MTU0NTcyMzQ1MywiZXhwIjoxNTQ1ODA4MDUzfQ.82kXmuOOZAx2Yjt-oJev7dELQ3IyLTntqezVcDVf6eo\",\n             \"user\": {\n                 \"_id\": \"5c21de22ed930600164ac93a\",\n                 \"email\": \"123@123.com\",\n                 \"__v\": 0\n             }\n         }\n     }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "List error",
+          "content": "HTTP/1.1 503 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/admin.js",
+    "groupTitle": "Admin"
+  },
+  {
     "type": "put",
     "url": "/admin/product",
     "title": "Updates Contact Details",
@@ -30,6 +67,47 @@ define({ "api": [
         {
           "title": "Success",
           "content": "{\n  \"responseCode\": 201,\n \"responseMessage\": \"Success\",\n \"data\": {\n    \"result\":  \"Successfully updated contact details\"\n}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "List error",
+          "content": "HTTP/1.1 503 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/admin.js",
+    "groupTitle": "Admin"
+  },
+  {
+    "type": "delete",
+    "url": "/admin/contact/:id",
+    "title": "Deletes a contact",
+    "group": "Admin",
+    "name": "Delete_Contact",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "id",
+            "optional": false,
+            "field": "Contact",
+            "description": "<p>ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"responseCode\": 201,\n     \"responseMessage\": \"Success\",\n     \"data\": {\n          \"result\": \"Successfully removed product\"\n     }\n  }",
           "type": "json"
         }
       ]
